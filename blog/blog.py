@@ -1,10 +1,12 @@
-from flask import flash, g, redirect, render_template, request, url_for
+from flask import flash, g, redirect, render_template, request, url_for, Blueprint
 from werkzeug.exceptions import abort
 
 from blog.auth import login_required
 from blog.db import get_db
-from . import bp
 
+
+
+bp = Blueprint('blog', __name__, template_folder='templates', static_folder='static', url_prefix='/blog')
 
 @bp.route('/')
 def index():
