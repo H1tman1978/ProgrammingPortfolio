@@ -26,11 +26,11 @@ def create_app(test_config=None):
     # Load flask extensions here
 
     # Load blueprints here
-    from blog import blog as blog_bp
-    app.register_blueprint(blog_bp, url_prefix='/blog')
+    import blog
+    app.register_blueprint(blog.bp)
 
-    from auth import bp as auth_bp
-    app.register_blueprint(auth_bp)
+    from blog import auth
+    app.register_blueprint(auth.bp)
 
     # Configure Database connection
     from blog import db

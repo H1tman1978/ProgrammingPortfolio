@@ -1,10 +1,12 @@
 import functools
 
-from flask import flash, g, redirect, render_template, request, session, url_for
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from blog.db import get_db
-from . import bp
+
+
+bp = Blueprint('auth', __name__, url_prefix='/auth', template_folder='templates', static_folder='static')
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -69,7 +71,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            return redirect(url_for('blog.index'))
 
         flash(error)
 
