@@ -1,22 +1,15 @@
 from flask import flash, g, redirect, render_template, request, url_for, Blueprint
 from werkzeug.exceptions import abort
 
-from blog.auth import login_required
-from blog.db import get_db
+from flask_login import login_required
+
+from . import bp
 
 
-
-bp = Blueprint('blog', __name__, template_folder='templates', static_folder='static', url_prefix='/blog')
-
-@bp.route('/')
+@bp.route('/', methods=('GET', 'POST'))
 def index():
-    db = get_db()
-    posts = db.execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u on p.author_id = u.id'
-        ' ORDER BY created DESC'
-    ).fetchall()
-    return render_template('blog/index.html', posts=posts)
+    posts = "Posts will go here"
+    return render_template('blog/blog.html', posts=posts)
 
 
 @bp.route('/create', methods=('GET', 'POST'))

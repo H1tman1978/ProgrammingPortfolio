@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Log In{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        <ul class="errors">
+            {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                {% for error in field_errors %}
+                    <li>{{ form[field_name].label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+  <form method="post">
+     {{ form.hidden_tag() }}
+      <p>
+          {{ form.username.label }}<br>
+          {{ form.username(size=30) }}
+      </p>
+      <p>
+          {{ form.password.label }}<br>
+          {{ form.password(size=30) }}
+      </p>
+      <p>{{ form.remember_me() }}{{ form.remember_me.label }}</p>
+      <p>{{ form.submit() }}</p>
+  </form>
+{% endblock %}
