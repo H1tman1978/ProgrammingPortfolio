@@ -14,13 +14,11 @@ migrate = Migrate()
 @login_manager.user_loader
 def load_user(user_id):
     from auth.models import User
-    print("Load User Function Generated...")
     return User.query.get(int(user_id))
 
 
 def create_app(test_config=None):
     # create and configure the app
-    print("Setting up Flask App")
     app = Flask(__name__, instance_relative_config=True)
 
     if test_config is None:
@@ -39,11 +37,9 @@ def create_app(test_config=None):
     # Load flask extensions here
 
     # Flask-Login
-    print("Configuring Login Manager")
     login_manager.init_app(app)
 
     # Load blueprints here
-    print("Loading Blueprints...")
     from blog import bp as blog_bp
     app.register_blueprint(blog_bp)
 
@@ -51,7 +47,6 @@ def create_app(test_config=None):
     app.register_blueprint(auth_bp)
 
     # Configure Database connection
-    print("Configuring Database Connection")
     from database import db
     db.init_app(app)
     db.create_all(app=app)

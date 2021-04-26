@@ -5,8 +5,6 @@
     {% else %}
     <title>Welcome to My Programming Portfolio</title>
     {% endif %}
-
-<title>{% block title %}{% endblock %} - My Programming Portfolio</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 {% block head %}
 {% endblock %}
