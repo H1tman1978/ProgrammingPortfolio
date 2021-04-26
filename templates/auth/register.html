@@ -5,20 +5,31 @@
 {% endblock %}
 
 {% block content %}
-    {% if form.errors %}
-        <ul class="errors">
-            {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-                {% for error in field_errors %}
-                    <li>{{ form[field_name].label }}: {{ error }}</li>
-                {% endfor %}
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <h1>Register</h1>
     <form method="POST">
-        {{ form.csrf_token }}
-        {{ form.first_name.label }} {{ form.first_name(size=30) }}
-        {{ form.last_name.label }} {{ form.last_name(size=30) }}
-        {{ form.phone_number.label }} {{ form.phone_number(size=20) }}
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.first_name.label }}<br>
+            {{ form.first_name(size=30) }}<br>
+            {% for error in form.first_name.errors %}
+                <span style="color: red">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.last_name.label }}<br>
+            {{ form.last_name(size=30) }}<br>
+            {% for error in form.last_name.errors %}
+                <span style="color: red">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.phone_number.label }}<br>
+            {{ form.phone_number(size=20) }}<br>
+            {% for error in form.phone_number.errors %}
+                <span style="color: red">{{ error }}</span>
+            {% endfor %}
+
+        </p>
         {{ form.email.label }} {{ form.email(size=50) }}
         {{ form.username.label }} {{ form.username(size=30) }}
         {{ form.password.label }} {{ form.password(size=30) }}

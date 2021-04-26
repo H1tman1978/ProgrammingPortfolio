@@ -5,9 +5,12 @@
     {% else %}
     <title>Welcome to My Programming Portfolio</title>
     {% endif %}
+
+<title>{% block title %}{% endblock %} - My Programming Portfolio</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block head %}
+{% endblock %}
 </head>
-<title>{% block title %}{% endblock %} - Portfolio</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
   <h2>My Programming Portfolio</h2>
   <ul>
@@ -20,12 +23,23 @@
     {% endif %}
   </ul>
 </nav>
-<section class="content">
+<section class="sidenav">
+    <div class="sidenav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+        {% block sidenav %}{% endblock %}
+    </div>
+</section>
+<section class="content main">
   <header>
     {% block header %}{% endblock %}
   </header>
   {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
   {% endfor %}
+
   {% block content %}{% endblock %}
 </section>
+
